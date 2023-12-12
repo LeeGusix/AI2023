@@ -19,10 +19,10 @@ public class UIManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        notice00.gameObject.SetActive(true);
-        notice01.gameObject.SetActive(false);
-        notice02.gameObject.SetActive(false);
-
+        notice00.SetActive(true);
+        notice01.SetActive(false);
+        notice02.SetActive(false);
+        nextButton.SetActive(true);
         CalcButton.SetActive(false);
     }
 
@@ -33,7 +33,7 @@ public class UIManager : MonoBehaviour
             notice00.SetActive(false);
             notice01.SetActive(true);
             notice02.SetActive(false);
-
+            nextButton.SetActive(false);
             CalcButton.SetActive(true);
         }
         else if(notice01.activeSelf == true)
@@ -41,7 +41,7 @@ public class UIManager : MonoBehaviour
             notice00.SetActive(false);
             notice01.SetActive(false);
             notice02.SetActive(true);
-
+            nextButton.SetActive(true);
             CalcButton.SetActive(false);
         }
         else if(notice02.activeSelf == true)
