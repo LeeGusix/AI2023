@@ -45,9 +45,13 @@ public class Road_Calori : MonoBehaviour
             }
             Data.Add(ColumnData);
         }
-        Debug.Log(Data[215-1][1-1]);
+        //Debug.Log(Data[215-1][1-1]);
     }
 
+    public string Get(int x, int y)
+    {
+        return Data[x][y];
+    }
 
 /*public class Food
     {

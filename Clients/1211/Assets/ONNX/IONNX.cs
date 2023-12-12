@@ -53,7 +53,9 @@ public class IONNX : MonoBehaviour
         //추론 엔진 생성 // GPU 작업 예약
         var worker = WorkerFactory.CreateWorker(WorkerFactory.Type.ComputePrecompiled, m_RunTimeModel);
 
-        //Texture2D texture = ScaleTexture(img, predict.ImageWidth, predict.ImageHeight);
+        //Texture2D texture = img;// ScaleTexture(img, predict.ImageWidth, predict.ImageHeight);
+        //texture.Reinitialize(256, 256);
+
 
         //#인풋 인자값인 텍스쳐 지정
         TensorShape shape = new TensorShape(1,256,256,3);
@@ -101,6 +103,9 @@ public class IONNX : MonoBehaviour
         output_boxes.Dispose();
         output_classe.Dispose();
         input.Dispose();
+
+        predict.BBoxes = null;
+        predict.Classes = null;
 
         return result;
     }
