@@ -41,7 +41,7 @@ def ToF(file, cat): # 분류 적용
     
 def detect(save_img=False):
     # 데이터 분류를 위한 옵션 지정
-    imgsz = (256, 256) if ONNX_EXPORT else opt.img_size  # (320, 192) or (416, 256) or (608, 352) for (height, width)
+    imgsz = (512, 512) if ONNX_EXPORT else opt.img_size  # (320, 192) or (416, 256) or (608, 352) for (height, width)
     out, source, weights, half, view_img, save_txt, save_xml = opt.output, opt.source, opt.weights, opt.half, opt.view_img, opt.save_txt, opt.save_xml
     webcam = source == '0' or source.startswith('rtsp') or source.startswith('http') or source.endswith('.txt')
 
