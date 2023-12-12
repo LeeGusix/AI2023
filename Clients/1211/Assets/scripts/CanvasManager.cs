@@ -9,10 +9,12 @@ public class CanvasManager : MonoBehaviour
     public GameObject ResultCanvas;
     public GameObject ExitNotice;
 
+    public bool EnableResult;
+
     void Start()
     {
         PhotoCanvas.gameObject.SetActive(true);
-        ResultCanvas.gameObject.SetActive(false);
+        if(EnableResult) ResultCanvas.gameObject.SetActive(false);
         ExitNotice.gameObject.SetActive(false);
     }
 

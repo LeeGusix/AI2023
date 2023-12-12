@@ -2597,6 +2597,7 @@ MonoBehaviour:
   PhotoCanvas: {fileID: 1226674933}
   ResultCanvas: {fileID: 1395934071}
   ExitNotice: {fileID: 1375628651}
+  EnableResult: 1
 --- !u!114 &848392007
 MonoBehaviour:
   m_ObjectHideFlags: 0
