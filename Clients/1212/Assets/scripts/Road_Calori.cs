@@ -1,47 +1,72 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Reflection;
+using TMPro;
+using TreeEditor;
 using UnityEngine;
 using UnityEngine.Networking;
+using UnityEngine.UIElements;
 
 public class Road_Calori : MonoBehaviour
 {
-    //번역 스프리드 시트를 불러오는 링크
-    const string langURL = "https://docs.google.com/spreadsheets/d/1vq5bOnVS79-hKQDKxzsCbdrCMc8oVq3R/edit?usp=drive_link&ouid=100305297284869565799&rtpof=true&sd=true";
-    string[] row;
+    const string langURL = "https://docs.google.com/spreadsheets/d/1vq5bOnVS79-hKQDKxzsCbdrCMc8oVq3R/export?format=tsv";
+    string SheetData;
+    public TMP_Text FoodName;
+    public int Image_Num;
+    public List<List<string>> Data = new List<List<string>>();
+
+
     void Start()
     {
-        StartCoroutine(GetLangCo());
+        StartCoroutine(LoadData());
     }
 
-    IEnumerator GetLangCo()
+    IEnumerator LoadData()
     {
         UnityWebRequest www = UnityWebRequest.Get(langURL);
         yield return www.SendWebRequest();
-        SetRowList(www.downloadHandler.text);
+        //Debug.Log(www.downloadHandler.text);
+        SheetData = www.downloadHandler.text;
+
+        SetRowList();
     }
 
-    void SetRowList(string tsv)
+    void SetRowList()
     {
-        //하나의 긴 문장을 공백 단위로 분리
-        row = tsv.Split(' ');
-    }
-
-    public string RoadData(string key)
-    {
-        Debug.Log(key);
-        //불러온 스프리드 시트의 인덱스 번호 중 key와 같은 단어를 찾는다
-        for (int i = 0; i < row.Length; i++)
+        string[] rows = SheetData.Split('\n');
+        for (int i = 0; i < rows.Length; i++)
         {
-            string[] column = row[i].Split(' ');  //공백 단위로 문자열 나눔 column에는 공백 개수+1개의 문자열이 저장
-
-            if (column[0] == key)
-            {  //key와 같은 한글 단어를 찾는 다면 그와 쌍으로 존재하는 영단어 반환
-                column[0] = column[1].Replace("\r", "");
-                return column[0];
+            string[] columns = rows[i].Split('\t');
+            List<string> ColumnData = new List<string>();
+            for (int j = 0; j < columns.Length; j++)
+            {
+                ColumnData.Add(columns[j]);
             }
+            Data.Add(ColumnData);
         }
-        //없으면 공백 반환
-        Debug.Log("..");
-        return "";
+        Debug.Log(Data[215-1][1-1]);
     }
+
+
+/*public class Food
+    {
+        public string Food_Name;
+        public int weights;
+        public int kcal;
+        public int Carbohydrate;
+        public int sugar_content;   
+        public int kcal4;
+        public int kcal5;
+        public int kcal6;
+        public int kcal7;
+        public int kcal8;
+        public int kcal9;
+        public int kcal10;
+        public int kcal11;
+        public int kcal12;
+        public int kcal13;
+        public int kcal14;
+        public int kcal15;
+    }*/
 }
